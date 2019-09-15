@@ -1,0 +1,56 @@
+---
+- name: install xserver
+  apt: 
+    name: 
+    - xserver-xorg
+    - xserver-xorg-core
+    - xfonts-base
+    - xinit
+    - x11-xserver-utils
+    install_recommends: no
+  environment:
+    DEBIAN_FRONTEND: noninteractive
+  register: install_xserver
+
+- name: install fonts
+  apt: 
+    name: 
+    - fonts-ipa*
+    - fonts-noto
+    - fonts-ricty-diminished
+    install_recommends: no
+  environment:
+    DEBIAN_FRONTEND: noninteractive
+  register: install_fonts
+
+- name: install xfce
+  apt: 
+    name:
+    - task-xfce-desktop
+    - pavucontrol
+    - pulseaudio
+    - xfce4-goodies
+    - ibus-mozc
+    - lightdm
+    - lightdm-gtk-greeter
+    - firefox-esr
+    - firefox-esr-l10n-ja
+    - plymouth-x11
+    - gimp
+    - inkscape
+    - libreoffice
+    install_recommends: no
+  environment:
+    DEBIAN_FRONTEND: noninteractive
+  register: install_desktop
+
+- name: keyboard setting
+  lineinfile: >
+    dest="/etc/default/keyboard"
+    regexp="{{ item.regexp }}"
+    line="{{ item.line }}"
+  with_items:
+    - { regexp: "XKBMODEL=", line: 'XKBMODEL="{{ keyboardmodel }}"' }
+    - { regexp: "XKBLAYOUT=", line: 'XKBLAYOUT="{{ keyboardlayout }}"' }
+    - { regexp: "XKBVARIANT=", line: 'XKBVARIANT=""' }
+

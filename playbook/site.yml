@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: yes
+  roles:
+    - docker
+    - git
+    - anyenv
+    - xface4
+    - ntp
+    - users
+    - gantsign.atom
+    - gantsign.visual-studio-code

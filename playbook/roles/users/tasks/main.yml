@@ -1,0 +1,57 @@
+---
+- name: create default user-dirs
+  file: >
+    path="/etc/skel/{{ item }}"
+    state=directory
+  with_items:
+    - Desktop
+    - Downloads
+    - Templates
+    - Public
+    - Documents
+    - Music
+    - Pictures
+    - Videos
+    - Project
+- name: add tools
+  copy: >
+    dest="/etc/skel"
+    src="tools"
+- name: xdg setting
+  copy: >
+    dest="/etc/xdg/user-dirs.conf"
+    src="user-dirs.conf"
+- name: create user
+  user: >
+    name="{{ users_username }}"
+    groups="{{ users_groups }}"
+    shell="/bin/bash"
+    password="{{ users_password | password_hash('sha512') }}"
+    update_password=on_create
+- name: add to sudoers
+  lineinfile: >
+    dest="/etc/sudoers.d/{{ users_username }}"
+    line="{{ users_username }} ALL=(ALL:ALL) NOPASSWD:ALL"
+    create=yes
+- name: Append docker group to user.
+  user: name={{ users_username }} groups=docker append=yes
+- name: add .ssh
+  copy: >
+    dest="/home/{{ users_username }}"
+    src=".ssh"
+    owner="{{ users_username }}"
+    mode="600"
+- name: add .config
+  copy: >
+    dest="/home/{{ users_username }}"
+    src=".config"
+    owner="{{ users_username }}"
+- name: add IM values
+  lineinfile: >
+      dest="/home/{{ users_username }}/.bashrc"
+      line={{ item }}
+  with_items:
+      - 'export GTK_IM_MODULE=ibus'
+      - 'export XMODIFIERS=@im=ibus'
+      - 'export QT_IM_MODULE=ibus'
+
