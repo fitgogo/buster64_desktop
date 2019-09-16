@@ -5,4 +5,5 @@ playbiik/roles/users/files/tools/postgresql_container/postgresql/*
 .ssh/
 *.log
 *.box
+!.gitkeep
 

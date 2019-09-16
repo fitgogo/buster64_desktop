@@ -1,7 +1,7 @@
 #!/bin/sh
 
 docker run --name postgresql\
-	-v /home/vagrant/tools/postgresql_container/postgresql:/mnt\
+	-v /home/dev/tools/postgresql_container/postgresql:/mnt\
 	-e POSTGRES_USER=root\
 	-e POSTGRES_PASSWORD=password\
 	-e POSTGRES_DB=james\
