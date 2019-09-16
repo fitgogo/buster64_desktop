@@ -6,3 +6,6 @@ anyenv install nodenv
 anyenv install goenv
 
 exec $SHELL -l
+
+im-config
+
