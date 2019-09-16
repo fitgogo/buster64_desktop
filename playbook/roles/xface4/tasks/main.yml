@@ -31,6 +31,9 @@
     - pulseaudio
     - xfce4-goodies
     - ibus-mozc
+    - mozc-utils-gui
+    - im-config
+    - zenity
     - lightdm
     - lightdm-gtk-greeter
     - firefox-esr
