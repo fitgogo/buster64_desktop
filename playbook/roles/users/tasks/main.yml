@@ -57,3 +57,4 @@
       - 'if [ $GOPATH != ""]; then'
       - '  export PATH=$PATH:$GOPATH/bin'
       - 'fi'
+      - 'export EDITOR=vim'

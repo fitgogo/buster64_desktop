@@ -39,6 +39,7 @@
     - firefox-esr
     - firefox-esr-l10n-ja
     - plymouth-x11
+    - vim
     - gimp
     - inkscape
     - libreoffice
