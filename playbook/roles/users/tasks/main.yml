@@ -47,15 +47,14 @@
     src=".config"
     owner="{{ users_username }}"
 - name: add IM values
-  lineinfile: >
-      dest="/home/{{ users_username }}/.bashrc"
-      line={{ item }}
-  with_items:
-      - 'export EDITOR=vim'
-      - 'export GTK_IM_MODULE=ibus'
-      - 'export XMODIFIERS=@im=ibus'
-      - 'export QT_IM_MODULE=ibus'
-      - 'if [ ! $GOPATH = "" ]; then'
-      - '  export PATH=$PATH:$GOPATH/bin'
-      - 'fi'
+  blockinfile:
+      dest: "/home/{{ users_username }}/.bashrc"
+      block: |
+      export EDITOR=vim
+      export GTK_IM_MODULE=ibus
+      export XMODIFIERS=@im=ibus
+      export QT_IM_MODULE=ibus
+      if [ ! $GOPATH = "" ]; then
+        export PATH=$PATH:$GOPATH/bin
+      fi
 
