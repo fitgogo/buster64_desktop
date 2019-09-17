@@ -51,10 +51,11 @@
       dest="/home/{{ users_username }}/.bashrc"
       line={{ item }}
   with_items:
+      - 'export EDITOR=vim'
       - 'export GTK_IM_MODULE=ibus'
       - 'export XMODIFIERS=@im=ibus'
       - 'export QT_IM_MODULE=ibus'
-      - 'if [ $GOPATH != ""]; then'
+      - 'if [ ! $GOPATH = "" ]; then'
       - '  export PATH=$PATH:$GOPATH/bin'
       - 'fi'
-      - 'export EDITOR=vim'
+
